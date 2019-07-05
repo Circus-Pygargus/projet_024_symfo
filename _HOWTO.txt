@@ -1,0 +1,40 @@
+avec un dossier app vide, 
+aller chez symfony.com
+dans documentation, setup
+choper la deuxieme ligne : composer create-project symfony/skeleton my/project
+en ssh dans /var/www/html, on fera donc (./ pour coller à la racine) :
+composer create-project symfony/skeleton ./
+
+
+si le dosser non vide erreur,
+erreur possible ; manque mémoire ;
+dans ce cas attribuer 2Go à vagrant
+
+ici on a install juste le minimum 
+et symfony n'est pas encore prêt, 
+si on avait pris la première ligne de la page setup de la doc symfo,
+alors la machine serait prête ..
+
+une fois l'install faite, il demande un git init, donc :
+
+git init
+git add .
+git config --global user.name "Circus-Pygargus"
+git config --global user.email "richard.meuret@laposte.net"
+git commit -am "install projet"
+
+il faut que apache puisse pointer sur le dossier public :
+dans /var/www/html :
+sudo nano /etc/apache2/site-enabled/000-default.conf
+changer la ligne 
+DocumentRoot /var/www/html
+en 
+DocumentRoot /var/www/html/public
+puis CTRL + o
+entrée
+CTRL + x
+redemarrer apache
+sudo service apache2 restart
+
+maintenant dans le navigateur à localhost:8080
+on obtient une page : welcome to Symfony
